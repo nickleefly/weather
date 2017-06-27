@@ -1,18 +1,30 @@
 var React = require('react')
 var PropTypes = require('prop-types')
+var api = require('../utils/api')
 
 class ZipCode extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      zipcode: 90210
+      zipcode: ''
     }
+
+    this.handleSubmitZipcode = this.handleSubmitZipcode.bind(this)
+    this.handleUpdateZipcode = this.handleUpdateZipcode.bind(this)
   }
   handleSubmitZipcode () {
-
+    api.getCurrentWeather(this.state.zipcode)
+      .then(function (res) {
+        console.log(res)
+      })
   }
-  handleUpdateZipcode () {
-
+  handleUpdateZipcode (e) {
+    var zip = e.target.value
+    this.setState(function () {
+      return {
+        zipcode: zip
+      }
+    })
   }
   render () {
     return (
