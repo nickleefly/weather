@@ -1,9 +1,11 @@
 var React = require('react')
 var ZipCode = require('./ZipCode')
 var Forecast = require('./Forecast')
+var Detail = require('./Detail')
 var ReactRouter = require('react-router-dom')
 var BrowserRouter = ReactRouter.BrowserRouter
 var Route = ReactRouter.Route
+var NavLink = require('react-router-dom').NavLink
 
 class App extends React.Component {
   render () {
@@ -13,7 +15,7 @@ class App extends React.Component {
           <Route render={function (props) {
             return (
               <div className='navbar'>
-                <h1>Clever Title</h1>
+                <h1><NavLink to='/'>Weather</NavLink></h1>
                 <ZipCode
                   direction='row'
                   onSubmitZipcode={function (city) {
@@ -45,6 +47,7 @@ class App extends React.Component {
           }} />
 
           <Route path='/forecast' component={Forecast} />
+          <Route path='/details/:city' component={Detail} />
         </div>
       </BrowserRouter>
     )
