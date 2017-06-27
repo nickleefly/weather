@@ -1,6 +1,9 @@
 var axios = require('axios')
 
 var _baseURL = 'http://api.openweathermap.org/data/2.5/'
+if (process.env.NODE_ENV === 'production') {
+  _baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/'
+}
 var _APIKEY = '51dd30c17033e8a158e21e0624c4a28c'
 
 function prepRouteParams (queryStringData) {
