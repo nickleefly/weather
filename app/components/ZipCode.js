@@ -13,10 +13,11 @@ class ZipCode extends React.Component {
     this.handleUpdateZipcode = this.handleUpdateZipcode.bind(this)
   }
   handleSubmitZipcode () {
-    api.getCurrentWeather(this.state.zipcode)
-      .then(function (res) {
-        console.log(res)
-      })
+    console.log(this.state.zipcode)
+    // api.getCurrentWeather(this.state.zipcode)
+    //   .then(function (res) {
+    //     console.log(res)
+    //   })
   }
   handleUpdateZipcode (e) {
     var zip = e.target.value
@@ -41,7 +42,7 @@ class ZipCode extends React.Component {
           type='button'
           style={{margin: 10}}
           className='btn btn-success'
-          onClick={this.handleSubmitZipcodee}>
+          onClick={this.handleSubmitZipcode}>
             Get Weather
         </button>
       </div>
