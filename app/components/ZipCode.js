@@ -11,6 +11,7 @@ class ZipCode extends React.Component {
 
     this.handleSubmitZipcode = this.handleSubmitZipcode.bind(this)
     this.handleUpdateZipcode = this.handleUpdateZipcode.bind(this)
+    this.handleEnter = this.handleEnter.bind(this)
   }
   handleSubmitZipcode () {
     // api.getCurrentWeather(this.state.zipcode)
@@ -24,6 +25,11 @@ class ZipCode extends React.Component {
         zipcode: ''
       }
     })
+  }
+  handleEnter (e) {
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      this.handleSubmitZipcode()
+    }
   }
   handleUpdateZipcode (e) {
     var zip = e.target.value
@@ -43,6 +49,7 @@ class ZipCode extends React.Component {
           onChange={this.handleUpdateZipcode}
           placeholder='St. George, Utah'
           type='text'
+          onKeyDown={this.handleEnter}
           value={this.state.zipcode} />
         <button
           type='button'
