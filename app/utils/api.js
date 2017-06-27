@@ -1,7 +1,7 @@
 var axios = require('axios')
 
 var _baseURL = 'http://api.openweathermap.org/data/2.5/'
-var _APIKEY = '56d3155b0b5885dd52abeb1bb344c881'
+var _APIKEY = '51dd30c17033e8a158e21e0624c4a28c'
 
 function prepRouteParams (queryStringData) {
   return Object.keys(queryStringData)
