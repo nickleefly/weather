@@ -7,7 +7,7 @@ var config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
-    publicPath: '/react-training/'
+    publicPath: '/weather/'
   },
   module: {
     rules: [
