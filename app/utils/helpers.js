@@ -24,7 +24,7 @@ var monthsMap = {
 }
 
 function convertTemp (kelvin) {
-  return (kelvin - 273.15) * 1.8000 + 32.00
+  return Math.round(kelvin - 273.15, 4) + ' °C'
 }
 
 function getDate (unixTimestmap) {

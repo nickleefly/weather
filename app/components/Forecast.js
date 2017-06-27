@@ -1,19 +1,7 @@
 var React = require('react')
 var api = require('../utils/api')
 var queryString = require('query-string')
-var utils = require('../utils/helpers')
-var getDate = utils.getDate
-
-function DayItem (props) {
-  var date = getDate(props.day.dt)
-  var icon = props.day.weather[0].icon
-  return (
-    <div onClick={props.onClick} className='dayContainer'>
-      <img className='weather' src={'./app/images/weather-icons/' + icon + '.svg'} alt='Weather' />
-      <h2 className='subheader'>{date}</h2>
-    </div>
-  )
-}
+var DayItem = require('./DayItem')
 
 class Forecast extends React.Component {
   constructor (props) {
@@ -27,14 +15,12 @@ class Forecast extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount () {
-    console.log('this.props.location.search is ', this.props.location.search)
-    var city = queryString.parse(this.props.location.search).city
-    this.makeRequest(city)
+    this.city = queryString.parse(this.props.location.search).city
+    this.makeRequest(this.city)
   }
   componentWillReceiveProps (nextProps) {
-    console.log('nextProps is ', nextProps)
-    var city = queryString.parse(nextProps.location.search).city
-    this.makeRequest(city)
+    this.city = queryString.parse(nextProps.location.search).city
+    this.makeRequest(this.city)
   }
   makeRequest (city) {
     this.setState(function () {
@@ -45,7 +31,6 @@ class Forecast extends React.Component {
 
     api.getForecast(city)
       .then(function (res) {
-        console.log(res)
         this.setState(function () {
           return {
             loading: false,
@@ -54,16 +39,14 @@ class Forecast extends React.Component {
         })
       }.bind(this))
   }
-
   handleClick (city) {
+    city.city = this.city
     this.props.history.push({
       pathname: '/details/' + this.city,
       state: city
     })
   }
-
   render () {
-    console.log('this.state.forecastData is ', this.state.forecastData)
     return this.state.loading === true
       ? <h1 className='forecast-header'> Loading </h1>
       : <div>
@@ -71,7 +54,7 @@ class Forecast extends React.Component {
         <div className='forecast-container'>
           {this.state.forecastData.list.map(function (listItem) {
             return <DayItem onClick={this.handleClick.bind(this, listItem)} key={listItem.dt} day={listItem} />
-          })}
+          }, this)}
         </div>
       </div>
   }
