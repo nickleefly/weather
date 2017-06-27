@@ -13,10 +13,6 @@ class ZipCode extends React.Component {
     this.handleEnter = this.handleEnter.bind(this)
   }
   handleSubmitZipcode () {
-    // api.getCurrentWeather(this.state.zipcode)
-    //   .then(function (res) {
-    //     console.log(res)
-    //   })
     this.props.onSubmitZipcode(this.state.zipcode)
 
     this.setState(function () {
